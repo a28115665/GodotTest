@@ -29,7 +29,7 @@ static func _sp(img: Image, x, y, color: Color) -> void:
 	var px := int(x)
 	var py := int(y)
 	if px >= 0 and px < img.get_width() and py >= 0 and py < img.get_height():
-		_sp(img,px, py, color)
+		img.set_pixel(px, py, color)
 
 static func create_player_sprite(direction: String, frame: int = 0) -> ImageTexture:
 	var img = Image.create(16, 16, false, Image.FORMAT_RGBA8)
