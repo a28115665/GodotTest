@@ -250,7 +250,7 @@ static func create_pokemon_sprite(species_id: int, is_back: bool = false) -> Ima
 	return ImageTexture.create_from_image(img)
 
 static func _draw_pikachu(img: Image, is_back: bool) -> void:
-	var y_off = 4 if is_back else 2
+	var y_off = 4
 	# Body - yellow mouse
 	for y in range(y_off + 4, y_off + 16):
 		for x in range(8, 24):
