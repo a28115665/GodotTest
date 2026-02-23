@@ -1,3 +1,4 @@
+# Builds Godot project as HTML5 and deploys to GitHub Pages
 name: Deploy Godot Game to GitHub Pages
 
 on:
