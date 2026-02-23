@@ -15,6 +15,7 @@ GameData="*res://scripts/autoload/game_data.gd"
 SceneManager="*res://scripts/autoload/scene_manager.gd"
 BattleManager="*res://scripts/autoload/battle_manager.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+TouchControls="*res://scripts/autoload/touch_controls.gd"
 
 [display]
 
@@ -24,6 +25,10 @@ window/size/window_width_override=960
 window/size/window_height_override=864
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [input]
 
