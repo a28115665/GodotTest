@@ -53,10 +53,9 @@ jobs:
       - name: Add coi-serviceworker for SharedArrayBuffer support
         run: |
           cd build/web
-          cat > coi-serviceworker.js << 'SWEOF'
-          /*! coi-serviceworker v0.1.7 - Guido Zuidhof and contributors, licensed under MIT */
-          let coepCredentialless=!1;"undefined"==typeof window?(self.addEventListener("install",(function(){self.skipWaiting()})),self.addEventListener("activate",(function(e){e.waitUntil(self.clients.claim())})),self.addEventListener("fetch",(function(e){("only-if-cached"!==e.request.cache||"same-origin"===e.request.mode)&&e.respondWith(fetch(e.request).then((function(e){if(0===e.status)return e;const r=new Headers(e.headers);return r.set("Cross-Origin-Embedder-Policy",coepCredentialless?"credentialless":"require-corp"),r.set("Cross-Origin-Opener-Policy","same-origin"),new Response(e.body,{status:e.status,statusText:e.statusText,headers:r})})).catch((function(e){return new Response(null,{status:404,statusText:"Not Found"})})))}))):"undefined"!=typeof navigator&&navigator.serviceWorker&&navigator.serviceWorker.register(window.document.currentScript.src).then((function(e){console.log("COOP/COEP Service Worker registered",e.scope)}),(function(e){console.error("COOP/COEP Service Worker failed to register",e)}));
-          SWEOF
+          curl -fsSL https://raw.githubusercontent.com/nicholasgasior/gzuidhof-coi-serviceworker/refs/heads/master/coi-serviceworker.min.js -o coi-serviceworker.js || cat > coi-serviceworker.js << 'COIEOF'
+          if(typeof window==='undefined'){let e=!1;self.addEventListener("install",function(){self.skipWaiting()}),self.addEventListener("activate",function(e){e.waitUntil(self.clients.claim())}),self.addEventListener("fetch",function(t){if("only-if-cached"===t.request.cache&&"same-origin"!==t.request.mode)return;t.respondWith(fetch(t.request).then(function(t){if(0===t.status)return t;let r=new Headers(t.headers);return r.set("Cross-Origin-Embedder-Policy",e?"credentialless":"require-corp"),r.set("Cross-Origin-Opener-Policy","same-origin"),new Response(t.body,{status:t.status,statusText:t.statusText,headers:r})}).catch(function(){return new Response(null,{status:404})}))})}else{(async function(){if(window.crossOriginIsolated!==false)return;let r=window.navigator.serviceWorker;if(!r)return;let reg=await r.register(window.document.currentScript.src);if(reg.active&&!r.controller){window.location.reload()}})()}
+          COIEOF
 
       - name: Patch index.html for cross-origin isolation
         run: |
