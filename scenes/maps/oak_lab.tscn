@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://boaklab001"]
+
+[ext_resource type="Script" path="res://scripts/maps/oak_lab.gd" id="1_map"]
+[ext_resource type="PackedScene" uid="uid://bdialogue01" path="res://scenes/ui/dialogue_box.tscn" id="2_dialogue"]
+[ext_resource type="PackedScene" uid="uid://bgamemenu01" path="res://scenes/ui/game_menu.tscn" id="3_menu"]
+
+[node name="OakLab" type="Node2D"]
+script = ExtResource("1_map")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1, 1)
+
+[node name="DialogueBox" parent="." instance=ExtResource("2_dialogue")]
+
+[node name="GameMenu" parent="." instance=ExtResource("3_menu")]
