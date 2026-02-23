@@ -70,9 +70,9 @@ func get_warps() -> Array:
 		# Player house door
 		{"position": Vector2(4, 3), "target_map": "player_house", "target_position": Vector2(3, 6)},
 		{"position": Vector2(5, 3), "target_map": "player_house", "target_position": Vector2(4, 6)},
-		# Oak's Lab door
-		{"position": Vector2(12, 3), "target_map": "oak_lab", "target_position": Vector2(4, 10)},
-		{"position": Vector2(13, 3), "target_map": "oak_lab", "target_position": Vector2(5, 10)},
+		# Oak's Lab door (target one tile inside, not on the exit warp tile)
+		{"position": Vector2(12, 3), "target_map": "oak_lab", "target_position": Vector2(4, 9)},
+		{"position": Vector2(13, 3), "target_map": "oak_lab", "target_position": Vector2(5, 9)},
 	]
 
 func get_sign_text(tile_pos: Vector2) -> String:

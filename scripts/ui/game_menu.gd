@@ -28,8 +28,14 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
 		if is_open:
 			close_menu()
+			get_viewport().set_input_as_handled()
 		else:
+			# Don't open menu while dialogue is active
+			var dialogue = get_tree().get_first_node_in_group("dialogue_box")
+			if dialogue and dialogue.is_showing:
+				return
 			open_menu()
+			get_viewport().set_input_as_handled()
 
 func open_menu() -> void:
 	if is_open:

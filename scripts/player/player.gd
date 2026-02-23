@@ -34,9 +34,9 @@ func _ready() -> void:
 	animation_timer.timeout.connect(_on_animation_timer)
 	animation_timer.start(0.2)
 
-	# Restore position from save
+	# Restore position from save (centered on tile)
 	if GameData.player_position != Vector2.ZERO:
-		position = GameData.player_position * TILE_SIZE
+		position = GameData.player_position * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
 		target_position = position
 
 func _generate_sprites() -> void:
@@ -103,7 +103,8 @@ func _process_movement(delta: float) -> void:
 		position = start_position.lerp(target_position, move_progress)
 
 func _on_step_completed() -> void:
-	GameData.player_position = position / TILE_SIZE
+	# Store integer tile coordinates (player is centered on tile)
+	GameData.player_position = Vector2(int(position.x / TILE_SIZE), int(position.y / TILE_SIZE))
 
 	# Check for tall grass encounters
 	if is_in_tall_grass:
@@ -118,6 +119,9 @@ func _on_step_completed() -> void:
 	_check_warps()
 
 func _trigger_wild_encounter() -> void:
+	# Need at least one Pokemon in party to battle
+	if GameData.party.is_empty():
+		return
 	input_locked = true
 	var encounter_table = _get_encounter_table()
 	if encounter_table.is_empty():
@@ -150,7 +154,7 @@ func _interact() -> void:
 	var check_pos = position + direction * TILE_SIZE
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsPointQueryParameters2D.new()
-	query.position = check_pos + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
+	query.position = check_pos
 	query.collision_mask = 4  # NPC layer
 	var results = space_state.intersect_point(query)
 

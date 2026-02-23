@@ -43,14 +43,14 @@ class TouchDrawNode extends Control:
 	var b_touch_index: int = -1
 	var start_touch_index: int = -1
 
-	# Colors
-	var bg_color: Color = Color(0, 0, 0, 0.3)
-	var active_color: Color = Color(1, 1, 1, 0.5)
-	var dpad_color: Color = Color(0.2, 0.2, 0.2, 0.5)
-	var dpad_arrow_color: Color = Color(0.9, 0.9, 0.9, 0.6)
-	var btn_a_color: Color = Color(0.2, 0.6, 0.2, 0.5)
-	var btn_b_color: Color = Color(0.7, 0.2, 0.2, 0.5)
-	var btn_start_color: Color = Color(0.4, 0.4, 0.4, 0.5)
+	# Colors - very transparent to avoid blocking the game view
+	var bg_color: Color = Color(0, 0, 0, 0.12)
+	var active_color: Color = Color(1, 1, 1, 0.35)
+	var dpad_color: Color = Color(0.2, 0.2, 0.2, 0.18)
+	var dpad_arrow_color: Color = Color(0.9, 0.9, 0.9, 0.25)
+	var btn_a_color: Color = Color(0.2, 0.6, 0.2, 0.18)
+	var btn_b_color: Color = Color(0.7, 0.2, 0.2, 0.18)
+	var btn_start_color: Color = Color(0.4, 0.4, 0.4, 0.18)
 
 	func _ready() -> void:
 		set_anchors_preset(PRESET_FULL_RECT)
@@ -59,13 +59,14 @@ class TouchDrawNode extends Control:
 
 	func _update_positions() -> void:
 		var vp = get_viewport_rect().size
-		var scale_factor = maxf(vp.x / 320.0, 1.0)
-		dpad_radius = 36.0 * scale_factor
-		dpad_outer_radius = 52.0 * scale_factor
-		button_radius = 20.0 * scale_factor
 
-		var margin = 20.0 * scale_factor
-		var bottom_offset = 70.0 * scale_factor
+		# Compact controls at the very bottom edges
+		dpad_radius = 18.0
+		dpad_outer_radius = 26.0
+		button_radius = 12.0
+
+		var margin = 6.0
+		var bottom_offset = 26.0
 
 		dpad_center = Vector2(margin + dpad_outer_radius, vp.y - bottom_offset)
 
@@ -73,7 +74,7 @@ class TouchDrawNode extends Control:
 		var btn_y = vp.y - bottom_offset
 		btn_a_pos = Vector2(btn_x, btn_y - button_radius * 1.2)
 		btn_b_pos = Vector2(btn_x - button_radius * 2.5, btn_y)
-		btn_start_pos = Vector2(vp.x / 2.0, vp.y - margin - button_radius * 0.6)
+		btn_start_pos = Vector2(vp.x / 2.0, vp.y - margin - button_radius * 0.5)
 
 	func _input(event: InputEvent) -> void:
 		if event is InputEventScreenTouch:

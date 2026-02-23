@@ -68,7 +68,7 @@ func _build_map() -> void:
 
 func _spawn_player() -> void:
 	var player = player_scene.instantiate()
-	player.position = GameData.player_position * TILE_SIZE
+	player.position = GameData.player_position * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
 	player.add_to_group("player")
 	add_child(player)
 
@@ -120,6 +120,6 @@ func create_npc(npc_name: String, npc_type: String, pos: Vector2, dialogue: Arra
 	var npc = npc_scene.instantiate()
 	npc.npc_name = npc_name
 	npc.npc_type = npc_type
-	npc.position = pos * TILE_SIZE
+	npc.position = pos * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
 	npc.dialogue_lines = dialogue
 	add_child(npc)
