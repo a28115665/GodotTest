@@ -328,6 +328,10 @@ func _handle_enemy_fainted() -> void:
 			_show_action_menu()
 			return
 
+	# Set trainer defeated flag
+	if BattleManager.is_trainer_battle and BattleManager.trainer_defeated_flag != "":
+		GameData.set_flag(BattleManager.trainer_defeated_flag)
+
 	state = BattleState.BATTLE_END
 	BattleManager.end_battle("win")
 	await _show_message("You won!")

@@ -51,8 +51,11 @@ func _define_map() -> void:
 		map_data.append(row)
 
 func _spawn_npcs() -> void:
-	create_npc("Youngster", "trainer", Vector2(6, 15),
-		["I just caught a RATTATA!\nWant to see it?", "Catching POKEMON is so much fun!"] as Array[String])
+	var youngster = create_npc("Youngster", "trainer", Vector2(6, 15),
+		["I just caught a RATTATA!\nWant to see it?", "Let me show you how\nstrong it is!"] as Array[String])
+	youngster.trainer_party = [PokemonInstance.create(19, 5)]  # Rattata Lv5
+	youngster.defeated_flag = "route1_youngster"
+	youngster.post_defeat_dialogue = ["My RATTATA lost...\nI need to train more!"] as Array[String]
 
 func get_encounter_table() -> Array:
 	return [

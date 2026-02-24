@@ -47,8 +47,11 @@ func _spawn_npcs() -> void:
 	create_npc("Old Man", "trainer", Vector2(5, 8),
 		["I've had my coffee now so\nI'm fine!", "When I was young, POKEMON were\neverywhere!", "You can catch them in tall\ngrass with POKE BALLS!"] as Array[String])
 
-	create_npc("Bug Catcher", "trainer", Vector2(15, 10),
-		["There are lots of bugs in\nViridian Forest to the west!", "Have you been there?"] as Array[String])
+	var bug_catcher = create_npc("Bug Catcher", "trainer", Vector2(15, 10),
+		["There are lots of bugs in\nViridian Forest to the west!", "Let me show you my bug\nPOKEMON!"] as Array[String])
+	bug_catcher.trainer_party = [PokemonInstance.create(10, 4), PokemonInstance.create(13, 4)]  # Caterpie Lv4, Weedle Lv4
+	bug_catcher.defeated_flag = "viridian_bugcatcher"
+	bug_catcher.post_defeat_dialogue = ["You're pretty strong!\nI need to catch more bugs..."] as Array[String]
 
 func get_encounter_table() -> Array:
 	return [

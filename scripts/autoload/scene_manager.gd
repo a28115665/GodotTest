@@ -41,6 +41,17 @@ func transition_to_battle(wild_pokemon) -> void:
 	await _fade_in()
 	is_transitioning = false
 
+func transition_to_trainer_battle(t_name: String, t_party: Array) -> void:
+	if is_transitioning:
+		return
+	is_transitioning = true
+	BattleManager.start_trainer_battle(t_name, t_party)
+	await _battle_transition()
+	get_tree().change_scene_to_file("res://scenes/battle/battle_scene.tscn")
+	await get_tree().process_frame
+	await _fade_in()
+	is_transitioning = false
+
 func return_from_battle() -> void:
 	if is_transitioning:
 		return

@@ -115,7 +115,7 @@ func _on_player_entered_door(warp_data: Dictionary) -> void:
 	GameData.player_position = warp_data["target_position"]
 	SceneManager.transition_to_scene("res://scenes/maps/" + warp_data["target_map"] + ".tscn")
 
-func create_npc(npc_name: String, npc_type: String, pos: Vector2, dialogue: Array[String]) -> void:
+func create_npc(npc_name: String, npc_type: String, pos: Vector2, dialogue: Array[String]) -> Node:
 	var npc_scene = preload("res://scenes/npc.tscn")
 	var npc = npc_scene.instantiate()
 	npc.npc_name = npc_name
@@ -123,3 +123,4 @@ func create_npc(npc_name: String, npc_type: String, pos: Vector2, dialogue: Arra
 	npc.position = pos * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
 	npc.dialogue_lines = dialogue
 	add_child(npc)
+	return npc

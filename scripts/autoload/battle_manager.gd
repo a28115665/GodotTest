@@ -17,6 +17,7 @@ var player_party_index: int = 0
 var trainer_name: String = ""
 var trainer_party: Array = []
 var trainer_party_index: int = 0
+var trainer_defeated_flag: String = ""
 
 # Turn state
 var player_action: Dictionary = {}

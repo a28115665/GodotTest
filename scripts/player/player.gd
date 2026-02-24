@@ -109,7 +109,7 @@ func _on_step_completed() -> void:
 	# Check for tall grass encounters
 	if is_in_tall_grass:
 		steps_in_grass += 1
-		if steps_in_grass > 2 and randf() < 0.15:
+		if steps_in_grass > 2 and randf() < 0.50:
 			steps_in_grass = 0
 			_trigger_wild_encounter()
 	else:
