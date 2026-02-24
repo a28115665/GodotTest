@@ -174,19 +174,19 @@ class TouchDrawNode extends Control:
 		# A button
 		var a_col = active_color if a_touch_index >= 0 else btn_a_color
 		draw_circle(btn_a_pos, button_radius, a_col)
-		_draw_label(btn_a_pos, "A")
+		_draw_label(btn_a_pos, "A[Z]")
 
 		# B button
 		var b_col = active_color if b_touch_index >= 0 else btn_b_color
 		draw_circle(btn_b_pos, button_radius, b_col)
-		_draw_label(btn_b_pos, "B")
+		_draw_label(btn_b_pos, "B[X]")
 
 		# START button
 		var start_col = active_color if start_touch_index >= 0 else btn_start_color
 		var sw = button_radius * 2.2
 		var sh = button_radius * 0.7
 		draw_rect(Rect2(btn_start_pos.x - sw / 2, btn_start_pos.y - sh / 2, sw, sh), start_col, true)
-		_draw_label(btn_start_pos, "START")
+		_draw_label(btn_start_pos, "START[Ent]")
 
 	func _draw_arrow(pos: Vector2, dir: Vector2, is_active: bool) -> void:
 		var color = Color.WHITE if is_active else dpad_arrow_color
