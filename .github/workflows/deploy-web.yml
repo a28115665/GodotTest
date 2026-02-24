@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - claude/godot-pokemon-game-sDS4D
   workflow_dispatch:
 
 permissions:
