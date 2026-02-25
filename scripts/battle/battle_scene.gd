@@ -31,7 +31,8 @@ var enemy_pokemon: PokemonInstance
 @onready var message_box: NinePatchRect = $UI/MessageBox
 @onready var action_menu: VBoxContainer = $UI/ActionMenu
 @onready var action_menu_bg: ColorRect = $UI/ActionMenuBG
-@onready var move_menu: VBoxContainer = $UI/MoveMenu
+@onready var move_menu: ScrollContainer = $UI/MoveMenu
+@onready var move_list: VBoxContainer = $UI/MoveMenu/MoveList
 @onready var fight_btn: Button = $UI/ActionMenu/FightBtn
 @onready var bag_btn: Button = $UI/ActionMenu/BagBtn
 @onready var pokemon_btn: Button = $UI/ActionMenu/PokemonBtn
@@ -166,26 +167,31 @@ func _on_run_pressed() -> void:
 func _show_move_menu() -> void:
 	action_menu.visible = false
 	move_menu.visible = true
+	move_menu.scroll_vertical = 0
 
 	# Clear old move buttons
-	for child in move_menu.get_children():
+	for child in move_list.get_children():
 		child.queue_free()
 
 	# Create move buttons
 	for i in range(player_pokemon.moves.size()):
 		var move = player_pokemon.moves[i]
 		var btn = Button.new()
+		btn.custom_minimum_size.y = 22
 		btn.text = move["name"] + " " + str(move["current_pp"]) + "/" + str(move["max_pp"])
 		btn.pressed.connect(_on_move_selected.bind(i))
-		move_menu.add_child(btn)
+		btn.focus_entered.connect(_scroll_to_button.bind(btn))
+		move_list.add_child(btn)
 		if i == 0:
 			btn.call_deferred("grab_focus")
 
 	# Back button
 	var back_btn = Button.new()
+	back_btn.custom_minimum_size.y = 22
 	back_btn.text = "Back"
 	back_btn.pressed.connect(_on_move_back)
-	move_menu.add_child(back_btn)
+	back_btn.focus_entered.connect(_scroll_to_button.bind(back_btn))
+	move_list.add_child(back_btn)
 
 func _on_move_selected(index: int) -> void:
 	if index >= player_pokemon.moves.size():
@@ -230,6 +236,16 @@ func _on_move_selected(index: int) -> void:
 
 func _on_move_back() -> void:
 	_show_action_menu()
+
+func _scroll_to_button(btn: Button) -> void:
+	var btn_top = btn.position.y
+	var btn_bottom = btn_top + btn.size.y
+	var scroll_top = float(move_menu.scroll_vertical)
+	var scroll_bottom = scroll_top + move_menu.size.y
+	if btn_top < scroll_top:
+		move_menu.scroll_vertical = int(btn_top)
+	elif btn_bottom > scroll_bottom:
+		move_menu.scroll_vertical = int(btn_bottom - move_menu.size.y)
 
 func _execute_player_move(move: Dictionary) -> void:
 	move["current_pp"] -= 1
