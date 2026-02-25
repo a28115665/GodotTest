@@ -177,7 +177,7 @@ func _show_move_menu() -> void:
 	for i in range(player_pokemon.moves.size()):
 		var move = player_pokemon.moves[i]
 		var btn = Button.new()
-		btn.custom_minimum_size.y = 22
+		_apply_button_theme(btn)
 		btn.text = move["name"] + " " + str(move["current_pp"]) + "/" + str(move["max_pp"])
 		btn.pressed.connect(_on_move_selected.bind(i))
 		btn.focus_entered.connect(_scroll_to_button.bind(btn))
@@ -187,7 +187,7 @@ func _show_move_menu() -> void:
 
 	# Back button
 	var back_btn = Button.new()
-	back_btn.custom_minimum_size.y = 22
+	_apply_button_theme(back_btn)
 	back_btn.text = "Back"
 	back_btn.pressed.connect(_on_move_back)
 	back_btn.focus_entered.connect(_scroll_to_button.bind(back_btn))
@@ -246,6 +246,58 @@ func _scroll_to_button(btn: Button) -> void:
 		move_menu.scroll_vertical = int(btn_top)
 	elif btn_bottom > scroll_bottom:
 		move_menu.scroll_vertical = int(btn_bottom - move_menu.size.y)
+
+func _apply_button_theme(btn: Button) -> void:
+	btn.custom_minimum_size.y = 22
+	btn.add_theme_constant_override("content_margin_top", 1)
+	btn.add_theme_constant_override("content_margin_bottom", 1)
+
+func _prompt_replace_move(move_name: String, move_data: Dictionary) -> void:
+	var pokemon_name = player_pokemon.get_display_name()
+	await _show_message(pokemon_name + " wants to learn " + move_data["name"] + "!")
+	await _show_message("But " + pokemon_name + " already knows 4 moves.")
+	await _show_message("Delete a move to make room for " + move_data["name"] + "?")
+
+	# Show current moves + Cancel in the MoveMenu area
+	move_menu.visible = true
+	move_menu.scroll_vertical = 0
+	for child in move_list.get_children():
+		child.queue_free()
+
+	var selected_index: int = -1
+
+	for i in range(player_pokemon.moves.size()):
+		var btn = Button.new()
+		_apply_button_theme(btn)
+		btn.text = player_pokemon.moves[i]["name"]
+		var idx = i
+		btn.pressed.connect(func(): selected_index = idx)
+		btn.focus_entered.connect(_scroll_to_button.bind(btn))
+		move_list.add_child(btn)
+		if i == 0:
+			btn.call_deferred("grab_focus")
+
+	var cancel_btn = Button.new()
+	_apply_button_theme(cancel_btn)
+	cancel_btn.text = "Cancel"
+	cancel_btn.pressed.connect(func(): selected_index = -2)
+	cancel_btn.focus_entered.connect(_scroll_to_button.bind(cancel_btn))
+	move_list.add_child(cancel_btn)
+
+	# Wait for player selection
+	while selected_index == -1:
+		await get_tree().process_frame
+
+	move_menu.visible = false
+
+	if selected_index == -2:
+		await _show_message(pokemon_name + " did not learn " + move_data["name"] + ".")
+	else:
+		var old_move_name = player_pokemon.moves[selected_index]["name"]
+		player_pokemon.replace_move(selected_index, move_name)
+		await _show_message("1, 2, 3... Poof!")
+		await _show_message(pokemon_name + " forgot " + old_move_name + ".")
+		await _show_message("And... " + pokemon_name + " learned " + move_data["name"] + "!")
 
 func _execute_player_move(move: Dictionary) -> void:
 	move["current_pp"] -= 1
@@ -333,7 +385,7 @@ func _handle_enemy_fainted() -> void:
 					player_pokemon.learn_move(new_move)
 					await _show_message(player_pokemon.get_display_name() + " learned " + move_data["name"] + "!")
 				else:
-					await _show_message(player_pokemon.get_display_name() + " wants to learn " + move_data["name"] + " but already knows 4 moves!")
+					await _prompt_replace_move(new_move, move_data)
 
 	# Check if trainer battle continues
 	if BattleManager.is_trainer_battle:

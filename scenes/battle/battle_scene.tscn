@@ -166,21 +166,29 @@ theme_override_constants/separation = 0
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "FIGHT"
+theme_override_constants/content_margin_top = 1
+theme_override_constants/content_margin_bottom = 1
 
 [node name="BagBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "BAG"
+theme_override_constants/content_margin_top = 1
+theme_override_constants/content_margin_bottom = 1
 
 [node name="PokemonBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "POKEMON"
+theme_override_constants/content_margin_top = 1
+theme_override_constants/content_margin_bottom = 1
 
 [node name="RunBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "RUN"
+theme_override_constants/content_margin_top = 1
+theme_override_constants/content_margin_bottom = 1
 
 [node name="MoveMenu" type="ScrollContainer" parent="UI"]
 visible = false
