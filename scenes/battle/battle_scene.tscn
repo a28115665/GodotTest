@@ -146,17 +146,20 @@ offset_right = 310.0
 offset_bottom = 56.0
 text = ""
 
+[node name="ActionMenuBG" type="ColorRect" parent="UI"]
+visible = false
+offset_left = 180.0
+offset_top = 196.0
+offset_right = 316.0
+offset_bottom = 284.0
+color = Color(0.95, 0.95, 0.9, 1)
+
 [node name="ActionMenu" type="VBoxContainer" parent="UI"]
 visible = false
 offset_left = 180.0
 offset_top = 196.0
 offset_right = 316.0
 offset_bottom = 284.0
-
-[node name="BG" type="ColorRect" parent="UI/ActionMenu"]
-layout_mode = 2
-custom_minimum_size = Vector2(136, 88)
-color = Color(0.95, 0.95, 0.9, 1)
 
 [node name="FightBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2

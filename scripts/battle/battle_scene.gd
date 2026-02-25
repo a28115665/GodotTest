@@ -30,6 +30,7 @@ var enemy_pokemon: PokemonInstance
 @onready var message_label: RichTextLabel = $UI/MessageBox/Label
 @onready var message_box: NinePatchRect = $UI/MessageBox
 @onready var action_menu: VBoxContainer = $UI/ActionMenu
+@onready var action_menu_bg: ColorRect = $UI/ActionMenuBG
 @onready var move_menu: VBoxContainer = $UI/MoveMenu
 @onready var fight_btn: Button = $UI/ActionMenu/FightBtn
 @onready var bag_btn: Button = $UI/ActionMenu/BagBtn
@@ -109,11 +110,13 @@ func _start_battle() -> void:
 func _show_action_menu() -> void:
 	state = BattleState.PLAYER_TURN
 	action_menu.visible = true
+	action_menu_bg.visible = true
 	move_menu.visible = false
 	fight_btn.grab_focus()
 
 func _hide_menus() -> void:
 	action_menu.visible = false
+	action_menu_bg.visible = false
 	move_menu.visible = false
 
 func _on_fight_pressed() -> void:
