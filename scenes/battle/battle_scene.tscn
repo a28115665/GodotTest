@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbattle001"]
+[gd_scene load_steps=5 format=3 uid="uid://bbattle001"]
 
 [ext_resource type="Script" path="res://scripts/battle/battle_scene.gd" id="1_battle"]
 
 [sub_resource type="RectangleShape2D" id="battle_bg_shape"]
 size = Vector2(320, 288)
+
+[sub_resource type="StyleBoxFlat" id="btn_normal_sb"]
+content_margin_left = 4.0
+content_margin_top = 1.0
+content_margin_right = 4.0
+content_margin_bottom = 1.0
+bg_color = Color(0.95, 0.95, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="btn_focus_sb"]
+content_margin_left = 4.0
+content_margin_top = 1.0
+content_margin_right = 4.0
+content_margin_bottom = 1.0
+bg_color = Color(0.82, 0.87, 0.82, 1)
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_battle")
@@ -166,29 +180,37 @@ theme_override_constants/separation = 0
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "FIGHT"
-theme_override_constants/content_margin_top = 1
-theme_override_constants/content_margin_bottom = 1
+theme_override_styles/normal = SubResource("btn_normal_sb")
+theme_override_styles/hover = SubResource("btn_focus_sb")
+theme_override_styles/pressed = SubResource("btn_focus_sb")
+theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="BagBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "BAG"
-theme_override_constants/content_margin_top = 1
-theme_override_constants/content_margin_bottom = 1
+theme_override_styles/normal = SubResource("btn_normal_sb")
+theme_override_styles/hover = SubResource("btn_focus_sb")
+theme_override_styles/pressed = SubResource("btn_focus_sb")
+theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="PokemonBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "POKEMON"
-theme_override_constants/content_margin_top = 1
-theme_override_constants/content_margin_bottom = 1
+theme_override_styles/normal = SubResource("btn_normal_sb")
+theme_override_styles/hover = SubResource("btn_focus_sb")
+theme_override_styles/pressed = SubResource("btn_focus_sb")
+theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="RunBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
 text = "RUN"
-theme_override_constants/content_margin_top = 1
-theme_override_constants/content_margin_bottom = 1
+theme_override_styles/normal = SubResource("btn_normal_sb")
+theme_override_styles/hover = SubResource("btn_focus_sb")
+theme_override_styles/pressed = SubResource("btn_focus_sb")
+theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="MoveMenu" type="ScrollContainer" parent="UI"]
 visible = false
