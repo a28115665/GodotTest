@@ -160,26 +160,39 @@ offset_left = 180.0
 offset_top = 196.0
 offset_right = 316.0
 offset_bottom = 284.0
+theme_override_constants/separation = 0
 
 [node name="FightBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 22)
 text = "FIGHT"
 
 [node name="BagBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 22)
 text = "BAG"
 
 [node name="PokemonBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 22)
 text = "POKEMON"
 
 [node name="RunBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 22)
 text = "RUN"
 
-[node name="MoveMenu" type="VBoxContainer" parent="UI"]
+[node name="MoveMenu" type="ScrollContainer" parent="UI"]
 visible = false
 offset_left = 4.0
 offset_top = 196.0
 offset_right = 176.0
 offset_bottom = 284.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MoveList" type="VBoxContainer" parent="UI/MoveMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
