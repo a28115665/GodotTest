@@ -106,8 +106,9 @@ func _on_step_completed() -> void:
 	# Store integer tile coordinates (player is centered on tile)
 	GameData.player_position = Vector2(int(position.x / TILE_SIZE), int(position.y / TILE_SIZE))
 
-	# Check for tall grass encounters
-	if is_in_tall_grass:
+	# Check for tall grass encounters - query map tile directly for reliability
+	var on_grass = _is_on_tall_grass()
+	if on_grass:
 		steps_in_grass += 1
 		if steps_in_grass > 2 and randf() < 0.50:
 			steps_in_grass = 0
@@ -117,6 +118,13 @@ func _on_step_completed() -> void:
 
 	# Check for door/warp tiles
 	_check_warps()
+
+func _is_on_tall_grass() -> bool:
+	var map = get_parent()
+	if map.has_method("get_tile_type"):
+		var tile_pos = Vector2(int(position.x / TILE_SIZE), int(position.y / TILE_SIZE))
+		return map.get_tile_type(tile_pos) == "tall_grass"
+	return is_in_tall_grass
 
 func _trigger_wild_encounter() -> void:
 	# Need at least one Pokemon in party to battle

@@ -93,6 +93,13 @@ func _define_map() -> void:
 			row.append("grass")
 		map_data.append(row)
 
+func get_tile_type(tile_pos: Vector2) -> String:
+	var x = int(tile_pos.x)
+	var y = int(tile_pos.y)
+	if y >= 0 and y < map_data.size() and x >= 0 and x < map_data[y].size():
+		return map_data[y][x]
+	return ""
+
 func get_encounter_table() -> Array:
 	return []
 

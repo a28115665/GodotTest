@@ -44,8 +44,12 @@ func interact() -> void:
 				# Not yet defeated - show dialogue then start battle
 				dialogue_box.show_dialogue_sequence(dialogue_lines)
 				await dialogue_box.dialogue_finished
+				if GameData.party.is_empty():
+					if player:
+						player.unlock_input()
+					return
 				BattleManager.trainer_defeated_flag = defeated_flag
-				SceneManager.transition_to_trainer_battle(npc_name, trainer_party)
+				await SceneManager.transition_to_trainer_battle(npc_name, trainer_party)
 			return
 
 		dialogue_box.show_dialogue_sequence(dialogue_lines)
