@@ -249,8 +249,22 @@ func _scroll_to_button(btn: Button) -> void:
 
 func _apply_button_theme(btn: Button) -> void:
 	btn.custom_minimum_size.y = 22
-	btn.add_theme_constant_override("content_margin_top", 1)
-	btn.add_theme_constant_override("content_margin_bottom", 1)
+	var normal_sb = StyleBoxFlat.new()
+	normal_sb.content_margin_left = 4
+	normal_sb.content_margin_top = 1
+	normal_sb.content_margin_right = 4
+	normal_sb.content_margin_bottom = 1
+	normal_sb.bg_color = Color(0.95, 0.95, 0.9, 1)
+	var focus_sb = StyleBoxFlat.new()
+	focus_sb.content_margin_left = 4
+	focus_sb.content_margin_top = 1
+	focus_sb.content_margin_right = 4
+	focus_sb.content_margin_bottom = 1
+	focus_sb.bg_color = Color(0.82, 0.87, 0.82, 1)
+	btn.add_theme_stylebox_override("normal", normal_sb)
+	btn.add_theme_stylebox_override("hover", focus_sb)
+	btn.add_theme_stylebox_override("pressed", focus_sb)
+	btn.add_theme_stylebox_override("focus", focus_sb)
 
 func _prompt_replace_move(move_name: String, move_data: Dictionary) -> void:
 	var pokemon_name = player_pokemon.get_display_name()

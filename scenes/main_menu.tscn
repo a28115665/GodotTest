@@ -58,5 +58,5 @@ text = "CONTINUE"
 
 [node name="Version" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "v1.0 - Godot Edition"
+text = "v1.1 - Godot Edition"
 horizontal_alignment = 1
