@@ -7,16 +7,16 @@ size = Vector2(320, 288)
 
 [sub_resource type="StyleBoxFlat" id="btn_normal_sb"]
 content_margin_left = 4.0
-content_margin_top = 1.0
+content_margin_top = 0.0
 content_margin_right = 4.0
-content_margin_bottom = 1.0
+content_margin_bottom = 0.0
 bg_color = Color(0.95, 0.95, 0.9, 1)
 
 [sub_resource type="StyleBoxFlat" id="btn_focus_sb"]
 content_margin_left = 4.0
-content_margin_top = 1.0
+content_margin_top = 0.0
 content_margin_right = 4.0
-content_margin_bottom = 1.0
+content_margin_bottom = 0.0
 bg_color = Color(0.82, 0.87, 0.82, 1)
 
 [node name="BattleScene" type="Node2D"]
@@ -178,7 +178,7 @@ theme_override_constants/separation = 0
 
 [node name="FightBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 22)
+custom_minimum_size = Vector2(0, 18)
 text = "FIGHT"
 theme_override_styles/normal = SubResource("btn_normal_sb")
 theme_override_styles/hover = SubResource("btn_focus_sb")
@@ -187,7 +187,7 @@ theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="BagBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 22)
+custom_minimum_size = Vector2(0, 18)
 text = "BAG"
 theme_override_styles/normal = SubResource("btn_normal_sb")
 theme_override_styles/hover = SubResource("btn_focus_sb")
@@ -196,7 +196,7 @@ theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="PokemonBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 22)
+custom_minimum_size = Vector2(0, 18)
 text = "POKEMON"
 theme_override_styles/normal = SubResource("btn_normal_sb")
 theme_override_styles/hover = SubResource("btn_focus_sb")
@@ -205,7 +205,7 @@ theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="RunBtn" type="Button" parent="UI/ActionMenu"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 22)
+custom_minimum_size = Vector2(0, 18)
 text = "RUN"
 theme_override_styles/normal = SubResource("btn_normal_sb")
 theme_override_styles/hover = SubResource("btn_focus_sb")
@@ -214,6 +214,7 @@ theme_override_styles/focus = SubResource("btn_focus_sb")
 
 [node name="MoveMenu" type="ScrollContainer" parent="UI"]
 visible = false
+clip_contents = true
 offset_left = 4.0
 offset_top = 196.0
 offset_right = 176.0
